@@ -35,21 +35,21 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true; // TODO: Condition not comtemplated for this app.
+        return true; // TODO: Condition not contemplated for this app.
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true; // TODO: Condition not comtemplated for this app.
+        return true; // TODO: Condition not contemplated for this app.
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true; // TODO: Condition not comtemplated for this app.
+        return true; // TODO: Condition not contemplated for this app.
     }
 
     @Override
     public boolean isEnabled() {
-        return true; // TODO: Condition not comtemplated for this app.
+        return true; // TODO: Condition not contemplated for this app.
     }
 }

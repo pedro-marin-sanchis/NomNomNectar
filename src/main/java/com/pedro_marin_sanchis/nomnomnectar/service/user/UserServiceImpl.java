@@ -5,6 +5,7 @@ import com.pedro_marin_sanchis.nomnomnectar.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +15,12 @@ import java.util.Optional;
 public class UserServiceImpl implements IUserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -42,6 +45,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public AppUser createUser(AppUser user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -58,7 +62,7 @@ public class UserServiceImpl implements IUserService {
             userToUpdate.setPhoneNumber(updatedUser.getPhoneNumber());
             userToUpdate.setOrders(updatedUser.getOrders());
             userToUpdate.setRolesAssociated(updatedUser.getRolesAssociated());
-            userToUpdate.setPassword(updatedUser.getPassword());
+            userToUpdate.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
             return userRepository.save(userToUpdate);
         } else {
             return null;

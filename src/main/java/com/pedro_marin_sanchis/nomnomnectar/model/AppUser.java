@@ -8,6 +8,19 @@ import java.util.Set;
 
 @Entity
 public class AppUser {
+
+    public AppUser() {}
+
+    public AppUser(String username, String name, String lastName, String email, String phoneNumber, String password, Set<Role> rolesAssociated) {
+        this.username = username;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.rolesAssociated = rolesAssociated;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
